@@ -1,20 +1,22 @@
+//[Technical] arguments must match schema name //
+//  ? 'authorId' cannot be 'id'
 const resolvers = {
   Query: {
     // returns an array of Tracks that will be used to populate the homepage grid of our web client
     tracksForHome: (_, __, { dataSources }) => {
       return dataSources.trackAPI.getTracksForHome();
     },
-    track:(_, {id}, {dataSources}) => {
+    track: (_, {id}, {dataSources}) => {
       return dataSources.trackAPI.getTrack(id);
-    }
+    },
   },
   Track: {
     author: ({ authorId }, _, { dataSources }) => {
       return dataSources.trackAPI.getAuthor(authorId);
     },
-    modules: ({trackId}, _, {dataSources}) => {
-      return dataSources.trackAPI.getTrackModules(trackId);
-    }
+    modules: ({id}, _, {dataSources}) => {
+      return dataSources.trackAPI.getTrackModules(id);
+    },
   },
 };
 
